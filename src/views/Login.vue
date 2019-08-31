@@ -43,33 +43,33 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Inject } from "vue-typedi";
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import { Inject } from 'vue-typedi';
 
-import { AuthService } from "@/services/AuthService";
-import { LoginResponse } from "../models/LoginResponse";
+import { AuthService } from '@/services/AuthService';
+import { LoginResponse } from '@/models/LoginResponse';
 
 @Component
 export default class App extends Vue {
   private service: AuthService = new AuthService();
 
-  private username: string = "";
-  private password: string = "";
-  private error: string = "";
+  private username: string = 'admin@accedia.com';
+  private password: string = 'admin';
+  private error: string = '';
 
   private login() {
     this.error = '';
     this.service
       .login(this.username, this.password)
-      .then(resp => {
-        this.error = "";
-        this.$store.commit("setToken", resp.data.token);
-        this.$store.commit("setUser", resp.data.user);
-        this.$router.push("/");
+      .then((resp) => {
+        this.error = '';
+        this.$store.commit('setToken', resp.data.token);
+        this.$store.commit('setUser', resp.data.user);
+        this.$router.push('/');
       })
-      .catch(err => {
-        this.error = "Invalid username or password";
+      .catch((err) => {
+        this.error = 'Invalid username or password';
       });
   }
 }
