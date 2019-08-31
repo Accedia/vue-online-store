@@ -29,7 +29,7 @@
 
       <router-link to="/cart" class="cart-button mr-3">
         <v-icon>fa-shopping-cart</v-icon>
-        <span class="badge">{{ cartSize }}</span>
+        <span class="badge" v-if="cartSize">{{ cartSize }}</span>
       </router-link>
       <img :src="userImage" class="user-image mr-2" />
 
