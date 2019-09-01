@@ -6,7 +6,9 @@
       dark>
 
       <v-btn text href="http://localhost:8080">
-        <img src="./assets/logo.png" class="header-logo" />
+        <router-link to="/">
+          <img src="./assets/logo.png" class="header-logo" />
+        </router-link>
       </v-btn>
 
       <v-spacer></v-spacer>

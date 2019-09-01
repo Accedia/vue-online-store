@@ -45,6 +45,11 @@ export default new Vuex.Store<AppState>({
         state.cart.push({ count: 1, item });
       }
     },
+    removeFromCart(state, item: Product) {
+      const index = state.cart.findIndex((i: CartItem) =>
+        i.item.id === item.id);
+      state.cart.splice(index, 1);
+    },
   },
   getters: {
     isLoggedIn(state) {

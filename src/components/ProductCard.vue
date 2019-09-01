@@ -34,6 +34,15 @@
         <span>Add to cart</span>
       </v-btn>
     </v-card-actions>
+    <v-snackbar v-model="showToast">
+      Product added to cart
+      <v-btn
+        color="primary"
+        text
+        @click="showToast = false">
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-card>
 </template>
 
@@ -53,6 +62,8 @@ export default class ProductCardComponent extends Vue {
   @Prop() private product!: Product;
   @Prop({ default: '100%' }) private imageWidth!: string;
 
+  private showToast: boolean = false;
+
   private get productUrl(): string {
     if (!this.product.images || this.product.images.length === 0) {
       return '';
@@ -66,6 +77,7 @@ export default class ProductCardComponent extends Vue {
 
   private addToCart() {
     this.$store.commit('addToCart', this.product);
+    this.showToast = true;
   }
 }
 </script>

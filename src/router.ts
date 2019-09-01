@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import Router, { NavigationGuard } from 'vue-router';
-import Home from './views/Home.vue';
-import Login from './views/Login.vue';
-import Product from './views/Product.vue';
-import store from './store';
+import Home from '@/views/Home.vue';
+import Login from '@/views/Login.vue';
+import Product from '@/views/Product.vue';
+import Cart from '@/views/Cart.vue';
+import store from '@/store';
 
 Vue.use(Router);
 
@@ -29,6 +30,12 @@ export default new Router({
       path: '/product/:id',
       name: 'product',
       component: Product,
+      beforeEnter: authGuard,
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: Cart,
       beforeEnter: authGuard,
     },
     {

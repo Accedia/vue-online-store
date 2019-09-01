@@ -100,9 +100,9 @@
         <v-row>
           <v-col cols="12">
             <label for="title">Title</label>
-            <v-text-field id="title" v-model="userReview.title" outlined></v-text-field>
+            <v-text-field id="title" v-model="userReview.title" single-line></v-text-field>
             <label for="body">Body</label>
-            <v-textarea id="body" v-model="userReview.body" outlined></v-textarea>
+            <v-textarea id="body" v-model="userReview.body" single-line></v-textarea>
 
             <v-row>
               <v-col cols="4">
@@ -111,7 +111,7 @@
                   :items="ratings"
                   :auto-select-first="true"
                   :return-object="false"
-                  outlined>
+                  single-line>
                 </v-select>
               </v-col>
               <v-col cols="3" offset-md="5">
@@ -162,6 +162,15 @@
         </v-row>
       </v-col>
     </v-row>
+    <v-snackbar v-model="showToast">
+      Product added to cart
+      <v-btn
+        color="primary"
+        text
+        @click="showToast = false">
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -193,6 +202,8 @@ export default class ProductComponent extends Vue {
   private reviews: Review[] = [];
   private alsoViewed: Product[] = [];
   private userReview: Review = new Review(0, '', '', 1);
+
+  private showToast: boolean = false;
 
   private ratings: any[] = [
     { value: 1, text: 'Poor' },
@@ -227,6 +238,7 @@ export default class ProductComponent extends Vue {
 
   private addToCart() {
     this.$store.commit('addToCart', this.product);
+    this.showToast = true;
   }
 }
 </script>
