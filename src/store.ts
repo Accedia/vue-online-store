@@ -35,9 +35,16 @@ export default new Vuex.Store<AppState>({
     clearUser(state) {
       state.user = null;
     },
-  },
-  actions: {
+    addToCart(state, item: Product) {
+      const existingProductIndex = state.cart.findIndex((i: CartItem) =>
+        i.item.id === item.id);
 
+      if (existingProductIndex >= 0) {
+        state.cart[existingProductIndex].count++;
+      } else {
+        state.cart.push({ count: 1, item });
+      }
+    },
   },
   getters: {
     isLoggedIn(state) {

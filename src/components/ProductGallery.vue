@@ -27,14 +27,14 @@ export default class ProductGalleryComponent extends Vue {
 
     const suitableImages = this.product.images
       .filter((i: ProductImage) => {
-        const width = parseInt(i.width);
-        const height = parseInt(i.height);
-        
+        const width = parseInt(i.width, 10);
+        const height = parseInt(i.height, 10);
+
         return (width >= 500 && width < 1000) || (height >= 500 && height < 1000);
       });
 
-    return suitableImages.length > 0 
-      ? suitableImages.map((i: ProductImage) => i.href) 
+    return suitableImages.length > 0
+      ? suitableImages.map((i: ProductImage) => i.href)
       : [];
   }
 }

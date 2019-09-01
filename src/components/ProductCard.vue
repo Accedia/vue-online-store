@@ -1,7 +1,8 @@
 <template>
   <v-card class="product-card">
     <img :src="productUrl"
-      class="product-image"/>
+      class="product-image"
+      :style="{ width: imageWidth }"/>
     <v-card-title>
       <router-link :to="{ name: 'product', params: { id: product.id } }">
         {{ product.name }}
@@ -28,7 +29,7 @@
     </div>
 
     <v-card-actions class="actions">
-      <v-btn text>
+      <v-btn text @click="addToCart">
         <v-icon>fa-shopping-cart</v-icon>
         <span>Add to cart</span>
       </v-btn>
@@ -50,6 +51,7 @@ import ProductStarRating from '@/components/ProductStartRating.vue';
 export default class ProductCardComponent extends Vue {
 
   @Prop() private product!: Product;
+  @Prop({ default: '100%' }) private imageWidth!: string;
 
   private get productUrl(): string {
     if (!this.product.images || this.product.images.length === 0) {
@@ -60,6 +62,10 @@ export default class ProductCardComponent extends Vue {
       .filter((i) => i.rel === 'Front_Standard')[0];
 
     return standartImage ? standartImage.href : this.product.images[0].href;
+  }
+
+  private addToCart() {
+    this.$store.commit('addToCart', this.product);
   }
 }
 </script>
@@ -75,7 +81,6 @@ export default class ProductCardComponent extends Vue {
 
     .product-image {
       display: block;
-      width: 100%;
       height: 200px;
       object-fit: contain;
       padding-left: 20px;
@@ -90,6 +95,10 @@ export default class ProductCardComponent extends Vue {
         text-decoration: none;
         font-size: 18px;
         line-height: 20px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
       }
     }
 

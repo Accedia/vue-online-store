@@ -1,7 +1,7 @@
 import Config from '@/config/config';
 import axios, { AxiosPromise } from 'axios';
 import { Product } from '@/models/Product';
-import { Review } from '@/models/Reviews';
+import { Review } from '@/models/Review';
 
 export class ProductsService {
 
@@ -38,5 +38,9 @@ export class ProductsService {
 
   public getProductReviews(id: string): AxiosPromise<Review[]> {
     return axios.get<Review[]>(`${this.baseUrl}/products/${id}/reviews`, this.authHeaders);
+  }
+
+  public getAlsoViewed(id: string): AxiosPromise<Product[]> {
+    return axios.get<Product[]>(`${this.baseUrl}/products/${id}/also-viewed`, this.authHeaders);
   }
 }
