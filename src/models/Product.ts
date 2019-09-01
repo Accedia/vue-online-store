@@ -1,4 +1,6 @@
 import { ProductImage } from './ProductImage';
+import { IncludedItem } from './IncludedItem';
+import { Feature } from './Feature';
 
 export class Product {
   public constructor(
@@ -10,5 +12,8 @@ export class Product {
     public images: ProductImage[],
     public customerReviewCount: number,
     public customerReviewAverage: number,
+    public modelNumber: string,
+    public includedItemList: IncludedItem[],
+    public features: Feature,
   ) {}
 }

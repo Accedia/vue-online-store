@@ -1,6 +1,7 @@
 import Config from '@/config/config';
 import axios, { AxiosPromise } from 'axios';
 import { Product } from '@/models/Product';
+import { Review } from '@/models/Reviews';
 
 export class ProductsService {
 
@@ -33,5 +34,9 @@ export class ProductsService {
 
   public getDealsOfTheDay(): AxiosPromise<Product[]> {
     return axios.get<Product[]>(`${this.baseUrl}/products/deal-of-the-day`, this.authHeaders);
+  }
+
+  public getProductReviews(id: string): AxiosPromise<Review[]> {
+    return axios.get<Review[]>(`${this.baseUrl}/products/${id}/reviews`, this.authHeaders);
   }
 }
