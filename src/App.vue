@@ -71,6 +71,7 @@ export default class App extends Vue {
 
   private search() {
     this.$router.push({ name: 'search', query: { q: this.searchTerm } });
+    this.searchTerm = '';
   }
 
   private logout() {

@@ -9,6 +9,18 @@
         <v-col cols="4" offset="1">
           Product
         </v-col>
+        <v-col cols="1">
+          Condition
+        </v-col>
+        <v-col cols="2">
+          Availability
+        </v-col>
+        <v-col cols="2">
+          Rating
+        </v-col>
+        <v-col cols="2">
+          Price
+        </v-col>
       </v-row>
 
       <v-row v-for="product in products" :key="product.id" class="found-item">
@@ -16,9 +28,31 @@
           <img :src="product.images[0].href" class="product-image" />
         </v-col>
         <v-col cols="4">
-          <router-link :to="{ name: 'product', params: { id: product.id } }">
+          <router-link :to="{ name: 'product', params: { id: product.id } }" class="product-name">
             {{ product.name }}
           </router-link>
+        </v-col>
+        <v-col cols="1">
+          {{ product.condition }}
+        </v-col>
+        <v-col cols="2">
+          {{ product.onlineAvailabilityText }}
+        </v-col>
+        <v-col cols="2">
+          <product-star-rating :rating="product.customerReviewAverage"></product-star-rating>
+          <span v-if="product.customerReviewCount">
+            <strong>{{ product.customerReviewAverage }}</strong>
+            <span> ({{ product.customerReviewCount }})</span>
+          </span>
+        </v-col>
+        <v-col cols="2">
+          <strong class="product-price">${{ product.salePrice }}</strong>
+          <div class="sale" v-show="product.onSale">
+            <p>On Sale</p>
+            <p>
+              <span class="saved-amount">Save ${{ (product.regularPrice - product.salePrice).toFixed(2) }}</span> 
+            </p>
+          </div>
         </v-col>
       </v-row>
     </div>
@@ -28,11 +62,16 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { ProductsService } from '../services/ProductsService';
+import { ProductsService } from '@/services/ProductsService';
 import { Product } from '@/models/Product';
+import ProductStarRating from '@/components/ProductStartRating.vue';
 import { AxiosResponse } from 'axios';
 
-@Component
+@Component({
+  components: {
+    ProductStarRating,
+  },
+})
 export default class SearchComponent extends Vue {
 
   private service!: ProductsService;
@@ -57,6 +96,10 @@ export default class SearchComponent extends Vue {
     width: 50px;
     height: 50px;
     object-fit: contain;
+  }
+
+  .product-name {
+    text-decoration: none;
   }
 
   .found-item {
