@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
 import Product from '@/views/Product.vue';
 import Cart from '@/views/Cart.vue';
+import Search from '@/views/Search.vue';
 import store from '@/store';
 
 Vue.use(Router);
@@ -36,6 +37,12 @@ export default new Router({
       path: '/cart',
       name: 'cart',
       component: Cart,
+      beforeEnter: authGuard,
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: Search,
       beforeEnter: authGuard,
     },
     {

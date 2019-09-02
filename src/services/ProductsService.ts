@@ -43,4 +43,8 @@ export class ProductsService {
   public getAlsoViewed(id: string): AxiosPromise<Product[]> {
     return axios.get<Product[]>(`${this.baseUrl}/products/${id}/also-viewed`, this.authHeaders);
   }
+
+  public search(query: string): AxiosPromise<Product[]> {
+    return axios.get<Product[]>(`${this.baseUrl}/products?q=${query}`, this.authHeaders);
+  }
 }

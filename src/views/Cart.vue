@@ -186,6 +186,4 @@ export default class CartComponent extends Vue {
       margin-bottom: 10px;
     }
   }
-
-
 </style>

@@ -21,7 +21,7 @@
             type="text"></v-text-field>
         </v-col>
         <v-col cols="1">
-          <v-btn text icon>
+          <v-btn text icon @click="search">
             <v-icon>fa-search</v-icon>
           </v-btn>
         </v-col>
@@ -67,6 +67,10 @@ export default class App extends Vue {
 
   private get cartSize() {
     return this.$store.getters.cartSize;
+  }
+
+  private search() {
+    this.$router.push({ name: 'search', query: { q: this.searchTerm } });
   }
 
   private logout() {
