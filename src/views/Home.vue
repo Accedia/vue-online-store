@@ -2,26 +2,38 @@
   <v-container>
     <v-row>
       <v-col cols="3">
+        <h4>Categories</h4>
         <v-treeview
           :items="categories"
           :load-children="getSubCategories"
           :active.sync="active"
+          :return-object="true"
           item-children="subCategories"
           activatable
           transition
         ></v-treeview>
       </v-col>
       <v-col>
-        <v-subheader>Most Popular</v-subheader>
+        <v-subheader>
+          <h3>Most Popular</h3>
+          <span v-if="active.length" class="subtitle">
+           &nbsp; in {{ active[0].name }}
+          </span>
+        </v-subheader>
         <v-row>
-          <v-col cols="4" v-for="product in mostViewed" :key="product.id">
+          <v-col cols="4" v-for="(product, i) in mostViewed" :key="product.id + i">
             <product-card :product="product"></product-card>
           </v-col>
         </v-row>
 
-        <v-subheader>Daily Deals</v-subheader>
+        <v-subheader>
+          <h3>Daily Deals</h3>
+          <span v-if="active.length" class="subtitle">
+           &nbsp; in {{ active[0].name }}
+          </span>
+        </v-subheader>
         <v-row>
-          <v-col cols="4" v-for="product in dealsOfTheDay" :key="product.id">
+          <v-col cols="4" v-for="(product, i) in dealsOfTheDay" :key="product.id + i">
             <product-card :product="product"></product-card>
           </v-col>
         </v-row>
@@ -66,6 +78,10 @@ export default class Home extends Vue {
         this.categories = res.data;
       });
 
+    this.reloadData();
+  }
+
+  private reloadData(): void {
     this.productsService.getMostViewed()
       .then((res: AxiosResponse<Product[]>) => this.mostViewed = res.data);
     this.productsService.getDealsOfTheDay()
@@ -74,7 +90,15 @@ export default class Home extends Vue {
 
   @Watch('active')
   private activeChanged(value: any) {
-    // change the displayed products here
+    if (value.length) {
+      const selectedCategory = value[0].id;
+      this.categoriesService.getMostViewedProducts(selectedCategory)
+        .then((res: AxiosResponse<Product[]>) => this.mostViewed = res.data);
+      this.categoriesService.getDealsOfTheDay(selectedCategory)
+        .then((res: AxiosResponse<Product[]>) => this.dealsOfTheDay = res.data);
+    } else {
+      this.reloadData();
+    }
   }
 
   private getSubCategories(item: any) {
@@ -87,11 +111,18 @@ export default class Home extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .v-subheader {
     padding: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
+
+    h3 {
+      font-size: 1.7rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      margin-top: .4rem;
+    }
   }
 
   .v-treeview-node__label {
