@@ -50,7 +50,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Inject } from 'vue-typedi';
 
 import { AuthService } from '@/services/AuthService';
 import { LoginResponse } from '@/models/LoginResponse';

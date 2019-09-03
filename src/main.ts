@@ -4,10 +4,8 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
-import VueTypedi from 'vue-typedi';
 
 Vue.config.productionTip = false;
-Vue.use(VueTypedi);
 
 new Vue({
   router,
