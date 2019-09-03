@@ -84,6 +84,10 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
+  html {
+    overflow-y: auto !important;
+  }
+
   .header-logo {
     width: 85px;
     height: 50px;
@@ -112,5 +116,18 @@ export default class App extends Vue {
 
   .col-1 .theme--dark.v-btn:hover::before {
     opacity: 0;
+  }
+
+  .public-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    object-fit: cover;
+    -webkit-filter: blur(2px);
+    filter: blur(2px);
+    overflow-y: hidden;
   }
 </style>

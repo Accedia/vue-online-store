@@ -1,5 +1,6 @@
 <template>
   <v-container class="fill-height" fluid>
+    <img class="public-background" src="../assets/splash.jpg" />
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
         <v-card class="elevation-12">
@@ -33,6 +34,10 @@
             </v-alert>
           </v-card-text>
           <v-card-actions>
+            <span class="ml-3">
+              No account?
+              <router-link to="/register">Register here</router-link>
+            </span>
             <div class="flex-grow-1"></div>
             <v-btn color="primary" @click="login">Login</v-btn>
           </v-card-actions>

@@ -5,6 +5,8 @@ import Login from '@/views/Login.vue';
 import Product from '@/views/Product.vue';
 import Cart from '@/views/Cart.vue';
 import Search from '@/views/Search.vue';
+import Register from '@/views/Register.vue';
+
 import store from '@/store';
 
 Vue.use(Router);
@@ -49,6 +51,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login,
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register,
     },
   ],
 });
