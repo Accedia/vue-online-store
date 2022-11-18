@@ -36,7 +36,7 @@
     "@fortawesome/fontawesome-free": "^5.10.2",
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-plugin-typescript": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
+    "@vue/cli-service": "^5.0.8",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
     "typescript": "^3.4.3",
